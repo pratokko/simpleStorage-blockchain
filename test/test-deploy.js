@@ -1,4 +1,4 @@
-const { assert } = require("chai")
+const { assert, expect } = require("chai")
 const { ethers } = require("hardhat")
 
 describe("SimpleStorage", function () {
@@ -19,4 +19,15 @@ describe("SimpleStorage", function () {
         const currentValue = await simpleStorage.retrieve()
         assert.equal(expectedValue, currentValue.toString())
     })
+    it("should add a person with the given name and favorite number", async function() {
+        // Call the addPerson function with sample inputs
+        await simpleStorage.addPerson("Alice", 42);
+    
+        // Get the stored favorite number for Alice
+        const aliceFavoriteNumber = await simpleStorage.NameToFavoriteNumber("Alice");
+    
+        // Assert that the favorite number was stored correctly
+        expect(aliceFavoriteNumber).to.equal(42);
+        
+      });
 })
